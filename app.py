@@ -1,12 +1,19 @@
 import streamlit as st
 import pandas as pd
-import joblib
+import pickle
 
 # Load pre-trained model and encoders
-model = joblib.load('model.pkl')
-labelencoder_gender = joblib.load('labelencoder_gender.pkl')
-labelencoder_surgery_type = joblib.load('labelencoder_surgery_type.pkl')
-labelencoder_outcome = joblib.load('labelencoder_outcome.pkl')
+with open('model.pkl', 'rb') as file:
+    model = pickle.load(file)
+
+with open('labelencoder_gender.pkl', 'rb') as file:
+    labelencoder_gender = pickle.load(file)
+
+with open('labelencoder_surgery_type.pkl', 'rb') as file:
+    labelencoder_surgery_type = pickle.load(file)
+
+with open('labelencoder_outcome.pkl', 'rb') as file:
+    labelencoder_outcome = pickle.load(file)
 
 # Function to make a prediction
 def predict_outcome(age, gender, surgery_type, days_since_last_visit):
